@@ -83,9 +83,12 @@ This README is missing documentation of your endpoints. Below is an example for 
 
 Endpoints
 GET '/api/v1.0/categories'
-GET ...
-POST ...
-DELETE ...
+GET '/api/vi.0/questions
+DELETE '/api/vi.0/questions/<int:question_id>'
+POST '/api/vi.0/questions
+POST '/api/vi.0/questions/search'
+GET '/api/vi.0/categories/<int:category_id>/questions'
+POST '/api/vi.0/quizzes'
 
 GET '/api/v1.0/categories'
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
@@ -99,6 +102,239 @@ GET '/api/v1.0/categories'
 '6' : "Sports"}
 
 ```
+
+GET '/api/vi.0/questions
+
+-Fetches a list of categories, questions,total questions and current category and it also includes pagination every 10 questions.
+-request Arguments: None
+  
+  
+{
+  "categories": {
+    "1": "Science",
+    "2": "Art",
+    "3": "Geography",
+    "4": "History",
+    "5": "Entertainment",
+    "6": "Sports"
+  },
+  "questions": [
+    {
+      "answer": "Uruguay",
+      "category": 6,
+      "difficulty": 4,
+      "id": 11,
+      "question": "Which country won the first ever soccer World Cup in 1930?"
+    },
+    {
+      "answer": "The Palace of Versailles",
+      "category": 3,
+      "difficulty": 3,
+      "id": 14,
+      "question": "In which royal palace would you find the Hall of Mirrors?"
+    },
+    {
+      "answer": "Agra",
+      "category": 3,
+      "difficulty": 2,
+      "id": 15,
+      "question": "The Taj Mahal is located in which Indian city?"
+    },
+    {
+      "answer": "One",
+      "category": 2,
+      "difficulty": 4,
+      "id": 18,
+      "question": "How many paintings did Van Gogh sell in his lifetime?"
+    },
+    {
+      "answer": "Jackson Pollock",
+      "category": 2,
+      "difficulty": 2,
+      "id": 19,
+      "question": "Which American artist was a pioneer of Abstract Expressionism, and a leading exponent of action painting?"
+    },
+    {
+      "answer": "The Liver",
+      "category": 1,
+      "difficulty": 4,
+      "id": 20,
+      "question": "What is the heaviest organ in the human body?"
+    },
+    {
+      "answer": "Alexander Fleming",
+      "category": 1,
+      "difficulty": 3,
+      "id": 21,
+      "question": "Who discovered penicillin?"
+    },
+    {
+      "answer": "Blood",
+      "category": 1,
+      "difficulty": 4,
+      "id": 22,
+      "question": "Hematology is a branch of medicine involving the study of what?"
+    },
+    {
+      "answer": "Scarab",
+      "category": 4,
+      "difficulty": 4,
+      "id": 23,
+      "question": "Which dung beetle was worshipped by the ancient Egyptians?"
+    },
+    {
+      "answer": "Neil Gaiman",
+      "category": null,
+      "difficulty": null,
+      "id": 24,
+      "question": "what is your fav"
+    }
+  ],
+  "success": true,
+  "total_questions": 21
+}
+
+DELETE '/api/vi.0/questions/<int:question_id>'
+DELETE question using a question ID.
+Arguments: Id to select Questions 
+Return all questions that are lefted after deletion.
+Example : curl -X DELETE /api/vi.0/questions/7
+
+
+POST '/api/vi.0/questions'
+
+POST a new question, which will require the question and answer text, category, and difficulty score.
+Arguments: none
+Retrun all list of questions with the created one.
+Example: curl -X POST curl -H "Content-Type: application/json" -d '{"question":"Enter question here", "answer":"Enter the qestions' answer here", "category":"specify the category", "difficulty":"specify the difficulty"} /api/vi.0/questions
+
+POST '/api/vi.0/questions/search'
+POST endpoint to get questions based on a search term.
+Return any questions for whom the search term is a substring of the question.
+Example: curl -X POST -H "Content-Type: application/json" -d '{"searchTerm":"entertain"}' /api/vi.0/questions/search 
+
+{
+  "current_category": null,
+  "questions": [
+    {
+      "answer": "codding",
+      "category": 5,
+      "difficulty": 3,
+      "id": 27,
+      "question": "what game will entertain you"
+    },
+    {
+      "answer": "codding",
+      "category": 5,
+      "difficulty": 3,
+      "id": 30,
+      "question": "what game will entertain you"
+    },
+    {
+      "answer": "codding",
+      "category": 5,
+      "difficulty": 3,
+      "id": 31,
+      "question": "what game will entertain you"
+    },
+    {
+      "answer": "codding",
+      "category": 5,
+      "difficulty": 3,
+      "id": 32,
+      "question": "what game will entertain you"
+    },
+    {
+      "answer": "codding",
+      "category": 5,
+      "difficulty": 3,
+      "id": 33,
+      "question": "what game will entertain you"
+    },
+    {
+      "answer": "codding",
+      "category": 5,
+      "difficulty": 3,
+      "id": 34,
+      "question": "what game will entertain you"
+    },
+    {
+      "answer": "codding",
+      "category": 3,
+      "difficulty": 3,
+      "id": 35,
+      "question": "what game will entertain you"
+    },
+    {
+      "answer": "codding",
+      "category": 5,
+      "difficulty": 2,
+      "id": 36,
+      "question": "what game will entertain you"
+    },
+    {
+      "answer": "codding",
+      "category": 5,
+      "difficulty": 1,
+      "id": 37,
+      "question": "what game will entertain you"
+    }
+  ],
+  "success": true,
+  "total_questions": 9
+}
+
+
+
+GET '/api/vi.0/categories/<int:category_id>/questions'
+GET questions based on specific category.
+Arguments: category Id
+Example /api/vi.0/categories/1/questions
+
+egories/1/questions
+{
+  "current_category": 1,
+  "questions": [
+    {
+      "answer": "The Liver",
+      "category": 1,
+      "difficulty": 4,
+      "id": 20,
+      "question": "What is the heaviest organ in the human body?"
+    },
+    {
+      "answer": "Alexander Fleming",
+      "category": 1,
+      "difficulty": 3,
+      "id": 21,
+      "question": "Who discovered penicillin?"
+    },
+    {
+      "answer": "Blood",
+      "category": 1,
+      "difficulty": 4,
+      "id": 22,
+      "question": "Hematology is a branch of medicine involving the study of what?"
+    },
+    {
+      "answer": "4:23",
+      "category": 1,
+      "difficulty": 2,
+      "id": 26,
+      "question": "what is the time"
+    }
+  ],
+  "success": true,
+  "total_questions": 4
+}
+
+
+POST '/api/vi.0/quizzes'
+
+
+
+
+
 
 
 ## Testing
